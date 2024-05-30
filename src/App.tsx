@@ -52,6 +52,13 @@ function App() {
         tasksForTodolist=tasks1.filter((task=>task.isDone))
         // tasksForTodolist=tasks1.filter((task=>task.isDone==true))
     }
+    const changeTaskStatus=(taskId:string,taskStatus:boolean)=>{
+        const task=tasks1.find(t=>t.id===taskId)
+        if(task){
+            task.isDone=taskStatus
+            setTasks([...tasks1])//отдаем на отрисовку
+        }
+    }
 
 
     return (
@@ -62,8 +69,10 @@ function App() {
                 tasks={tasksForTodolist}
                 date={"16.05.2024"}
                 removeTask={removeTask}
-                addTask={addTask}/>
-            {/*<TodoList title="What to sing" tasks={task2}/>*/}
+                addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
+            />
+
         </>
     )
 }
