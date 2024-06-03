@@ -32,7 +32,9 @@ export const TodoList = ({title, tasks, date, removeTask, changeFilter, addTask,
     }
 
     const addTaskHandler = () => {
+        if(taskTitle.length<15){
         addTask(taskTitle)
+        }
         setTaskTitle("")
     }
 
@@ -59,7 +61,8 @@ export const TodoList = ({title, tasks, date, removeTask, changeFilter, addTask,
                     onChange={changeTaskTitleHandler}
                     onKeyUp={addTaskOnKeyUpHandler}
                 />
-                <Button title="+" onClick={addTaskHandler}/>
+                <Button title="+" onClick={addTaskHandler} disabled={(!Boolean(taskTitle.trim( ))) || taskTitle.length>15 }/>
+                {taskTitle.length>15&&<div>Recomended task title is 15 chartes</div>}
             </div>
             {tasks.length === 0 ?
                 <p>NO TASKS</p> :
@@ -69,14 +72,7 @@ export const TodoList = ({title, tasks, date, removeTask, changeFilter, addTask,
                             removeTask(task.id)//got
                         }
 
-                        // const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {//e: ChangeEvent<HT...
-                        //     const newStatusValue = e.currentTarget.checked
-                        //     changeTaskStatus(task.id, newStatusValue)
-                        // }
-
-
                         return (
-
 
                             <li key={task.id}>
                                 <input type="checkbox"
